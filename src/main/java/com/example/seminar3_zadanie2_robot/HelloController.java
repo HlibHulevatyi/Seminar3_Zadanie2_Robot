@@ -43,10 +43,17 @@ public class HelloController {
         AnimationTimer timer = new AnimationTimer() {
             @Override
             public void handle(long now) {
-                if (wPressed) robot.moveManual(Robot.Direction.UP);
-                if (sPressed) robot.moveManual(Robot.Direction.DOWN);
-                if (aPressed) robot.moveManual(Robot.Direction.LEFT);
-                if (dPressed) robot.moveManual(Robot.Direction.RIGHT);
+                double maxX = gamePane.getWidth();
+                double maxY = gamePane.getHeight();
+
+                if (robot.isAutoMode()) {
+                    robot.moveAuto(maxX, maxY);
+                } else {
+                    if (wPressed) robot.moveManual(Robot.Direction.UP, maxX, maxY);
+                    else if (sPressed) robot.moveManual(Robot.Direction.DOWN, maxX, maxY);
+                    else if (aPressed) robot.moveManual(Robot.Direction.LEFT, maxX, maxY);
+                    else if (dPressed) robot.moveManual(Robot.Direction.RIGHT, maxX, maxY);
+                }
             }
         };
         timer.start();
