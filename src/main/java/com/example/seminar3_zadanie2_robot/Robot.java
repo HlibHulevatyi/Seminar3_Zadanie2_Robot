@@ -6,11 +6,29 @@ import javafx.scene.shape.Rectangle;
 
 public class Robot extends Pane {
     private final Rectangle body;
+    private double speed = 2.0;
+
+    public enum Direction { UP, DOWN, LEFT, RIGHT }
 
     public Robot() {
         body = new Rectangle(50, 50, Color.RED);
         getChildren().add(body);
 
+    }
+
+    public void moveManual(Direction dir) {
+        double newX = getLayoutX();
+        double newY = getLayoutY();
+
+        switch (dir) {
+            case RIGHT -> newX += speed;
+            case LEFT -> newX -= speed;
+            case DOWN -> newY += speed;
+            case UP -> newY -= speed;
+        }
+
+        setLayoutX(newX);
+        setLayoutY(newY);
     }
 
 }
